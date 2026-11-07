@@ -4,7 +4,7 @@ services:
     plan: free
     image: 
     url: docker.io/n8nio/n8n:latest
-  envVars:
+   envVars:
     - key: N8N_ENCRYPTION_KEY
       generatevalue: true
       value: postgresdb
@@ -17,7 +17,7 @@ services:
         name: n8n-db
         property: user
 
-  database:
-    - name: n8n-db
-      plan: free
+   databases:
+     - name: n8n-db 
+       plan: free
       
