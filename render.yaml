@@ -1,18 +1,23 @@
 services:
-  - type: web
-    name: meu-n8n
+  - type: n8n_service
     runtime: image
-    image: 
-      url: docker.n8n.io/n8nio/n8n:latest
     plan: free
-    envVars:
-      - key: N8N_PORT
-        value: "10000
-      - key: N8N_PROTOCOL
-        value: https
-      - key: WEBHOOK_URL
-        value: https://meu-n8n.onrender.com/
-      - key: N8N_ENCRYPTION_KEY
-        generateValue: true
-      - key: N8N_SECURE_COOKIE
-        value: "true
+    image: 
+    url: docker.io/n8nio/n8n:latest
+  envVars:
+    - key: N8N_ENCRYPTION_KEY
+      generatevalue: true
+      value: postgresdb
+    - key: DB_POSTGRESDB_DATABASE
+      fromDatabase:
+        name: n8n-db
+        property: host
+    - key: DB_POSTGESDB_PASSWORD
+      fromDatabase:
+        name: n8n-db
+        property: user
+
+  database:
+    - name: n8n-db
+      plan: free
+      
